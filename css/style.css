@@ -142,3 +142,9 @@ footer{
   text-align: center;
 
 }
+
+canvas{
+  background: #2f3642;
+  margin-top: 30px;
+  margin-left: 40%;
+}
