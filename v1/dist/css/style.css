@@ -83,8 +83,8 @@ header a:hover{
 
 #showcase{
   min-height: 600px;
-  background: url('../img/miami_large_blueblur.jpg') no-repeat -1200px -1200px /*move x and y axis*/;
-  text-align: center;
+  background: url('../img/miami_large_blueblur.jpg') no-repeat center center fixed; /*move x and y axis*/
+  background-size: cover;
   color: #ffffff;
 }
 
@@ -119,22 +119,24 @@ header a:hover{
 }
 
 /* Boxes */
-#boxes{
+.boxes{
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
 }
 
-#boxes .box{
-  float:left;
-  width:30%;
+.box{
   padding: 10px;
   text-align:center;
 }
 
-#boxes .box img{
-  width:200px;
+.box img{
+  width:80%;
 }
 
 footer{
+  display:block;
   background: #ff2d2d;
   color: #ffffff;
   margin-top: 20px;
@@ -145,6 +147,6 @@ footer{
 
 canvas{
   background: #2f3642;
-  margin-top: 30px;
-  margin-left: 40%;
+  margin: 30px auto 0px auto;
+  display: block;
 }
