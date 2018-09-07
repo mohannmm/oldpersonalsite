@@ -8,6 +8,57 @@ context.scale(25,25);
 // 1 = Block
 // 2 = Pivot Block
 
+class Tetromino {
+  constructor(matrix, pivotPoint) {
+    this.matrix = matrix;
+    this.pivotPoint = pivotPoint;
+  }
+}
+
+class Player {
+  constructor(tetromino) {
+
+  }
+
+  rotate() {
+
+  }
+
+  drop() {
+
+  }
+
+  instantDrop(){
+
+  }
+
+  left() {
+
+  }
+
+  right() {
+
+  }
+
+  collide() {
+    
+  }
+}
+
+class Arena {
+  constructor(matrix) {
+    this.matrix = matrix;
+  }
+
+  merge(otherMatrix) {
+
+  }
+
+  sweep() {
+
+  }
+}
+
 const T = [
   [1,2,1],
   [0,1,0]
