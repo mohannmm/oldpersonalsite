@@ -1,8 +1,70 @@
-.container {
-  text-align: center;
+nav {
+  height: 6vh;
+  background-color: #C4595C;
 }
 
-.container ul {
-  list-style: none;
-  padding: 0;
+nav a {
+  color: #f2a7ac;
 }
+
+nav a:hover {
+  color: #F2F2F2;
+}
+
+@media (max-width: 575.98px) {
+  nav a .fillerSpace {
+    display: none;
+  }
+}
+
+section {
+  height: 94vh;
+  background-color: #F2F2F2;
+  color: #000;
+  overflow-y: hidden;
+}
+
+section:nth-child(odd) {
+  background-color: #DDDDDD;
+}
+
+#section-profile {}
+
+#headshot {
+  display: inline;
+  padding: 2vh;
+  background-color: #C4595C;
+}
+
+#ul-profile {
+  position: relative;
+  align-self: center;
+  text-align: center;
+  overflow: hidden;
+  display: block;
+}
+
+/* Profile */
+
+h1 {
+  font-weight: 100 !important;
+  font-size: 3rem !important;
+  letter-spacing: .8rem;
+  padding: 5vh;
+  color: #AD0A0A;
+}
+
+#nameH {
+  padding-right: 10vh;
+}
+
+h3 {
+  font-family: serif !important;
+  padding: 5vh;
+}
+
+/* Expierience */
+
+/* Projects */
+
+/* Contact */
