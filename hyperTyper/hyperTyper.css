@@ -1,0 +1,59 @@
+/* Disable scroll */
+html, body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden
+}
+
+.wrong {
+        color: #FF0000;
+}
+
+.correct {
+        color: #00FF00;
+}
+
+#gameContainer {
+        width: 100vw;
+        border-style: solid;
+        border-width: thick;
+        border-color: #333333;
+}
+
+#screen {
+        background-color: #AA88BB;
+        height: 88vh;
+}
+
+.wordRow {
+        height: 10%;
+        line-height: 500%;
+}
+
+.word {
+        position: absolute;
+        left: 100px;
+}
+
+#buffer {
+        background-color: #AAAAAA;
+        height: 7vh
+}
+
+#bufferString {
+        line-height: 200%;
+        font-size: 3vh;
+        text-align: center;
+        height: 100%;
+        margin: 0 auto 0 auto;
+}
+
+#options {
+        background-color: #333333;
+        height: 5vh
+}
+
+#options>p {
+        color: #FFFFFF;
+        text-align: center
+}
