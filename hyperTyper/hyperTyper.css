@@ -1,7 +1,5 @@
 /* Disable scroll */
 html, body {
-        margin: 0;
-        height: 100%;
         overflow: hidden
 }
 
@@ -32,20 +30,20 @@ html, body {
 
 .word {
         position: absolute;
-        left: 100px;
+	left: 100px;
 }
 
 #buffer {
-        background-color: #AAAAAA;
+        background-color: #333333;
         height: 7vh
 }
 
 #bufferString {
+	color: #FFFFFF;A
         line-height: 200%;
         font-size: 3vh;
         text-align: center;
         height: 100%;
-        margin: 0 auto 0 auto;
 }
 
 #options {
@@ -55,5 +53,8 @@ html, body {
 
 #options>p {
         color: #FFFFFF;
-        text-align: center
+	line-height: 200%;
+	font-size: 3vh;
+	text-align: center;
+	height: 100%;
 }

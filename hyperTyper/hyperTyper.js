@@ -1,11 +1,14 @@
 var word = "Apple"
 var bufferString = "";
 var correctString = "", wrongString = "";
+var wordPos = 100;
+var wordVel;
 //var words[10];
 
 $(document).ready(function() {
+	worVel = $("screen").width();
 	var interval = 1000.0 / 60.0;
-	setInterval(loop, 2000);
+	setInterval(loop, interval);
 
 	//Key handling
 	$(document).keydown(function(key) {
@@ -25,11 +28,17 @@ $(document).ready(function() {
 						bufferString += key.key;
 		}
 
-		var ind = findWrongCharIndex(bufferString, word);
+		var ind = findWrongCharIndex(bufferString, getWord(0));
 		updateBufferString(ind);
 	})
 })
 
+// TODO: Add feature to check across array of all words
+function checkIfCompletedWord(bufferString, word) {
+	if (bufferString == word) {
+		word = "";
+	}
+}
 
 		/*** Functions ***/
 function findWrongCharIndex(str, word) {
@@ -57,13 +66,18 @@ function updateBufferString(wrongCharIndex) {
 }
 
 function spawnWord(word) {
-
+	getWord(0).html(word).css({left: 100});
+	wordPos = 100;
 }
 
-var x = 50;
+// TODO: Finish game loop
 function loop() {
 	console.log("looping...");
-	getWord(0).
+	getWord(0).css({left: wordPos++});
+
+	if (wordPos > 500 ) {
+		spawnWord("Yes");
+	}
 }
 
 //Jquery
