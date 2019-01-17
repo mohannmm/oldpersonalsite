@@ -1,86 +1,129 @@
-var word = "Apple"
+// buffer, word, wordList
+// updateWord(), checkCorrectWord(), //correctWordFound()
+// 1000 most common words in English language : https://gist.github.com/deekayen/4148741#file-1-1000-txt
+//
+
+var words = ["Apple", "Bob", "cat", "dog", "lactate", "incel", "super", "intermediate", "keyboard", "animalistic"];
+var lastWordInd = 0;
+var source = "local"
+
+var wordString = "Type 'start' to begin";
 var bufferString = "";
-var correctString = "", wrongString = "";
-var wordPos = 100;
-var wordVel;
-//var words[10];
+var score = 0;
+var seconds = 10;
 
-$(document).ready(function() {
-	worVel = $("screen").width();
-	var interval = 1000.0 / 60.0;
-	setInterval(loop, interval);
+var wordElement = document.getElementById("word");
+var bufferElement = document.getElementById("buffer");
+var timerElement = document.getElementById("timerCount");
+var scoreElement = document.getElementById("scoreCount");
 
-	//Key handling
-	$(document).keydown(function(key) {
-		key.preventDefault();
+var timer = setInterval(idle, 100);
 
-		// Handle special keys
-		switch (key.keyCode) {
-			case 13 : // Enter
-				bufferString = "";
-				break;
-			case 8 : // Backspace
-				bufferString = bufferString.slice(0, -1);
-			default:
-				// Handle normal character input
-				if (!key.altKey && !key.ctrlKey) //prevents alt input like å©œ...
-					if (key.keyCode >= 65 && key.keyCode <= 90)
-						bufferString += key.key;
-		}
+/************************************************************************/
 
-		var ind = findWrongCharIndex(bufferString, getWord(0));
-		updateBufferString(ind);
-	})
-})
+function init() {
+	bufferString = "";
+	wordString = getRandomWord("local");
+	score = 0.0;
+	seconds = 10;
 
-// TODO: Add feature to check across array of all words
-function checkIfCompletedWord(bufferString, word) {
-	if (bufferString == word) {
-		word = "";
-	}
+	wordElement.innerHTML = wordString;
+	bufferElement.innerHTML = bufferString;
+	scoreElement.innerHTML = score.toFixed(1);;
+	timerElement.innerHTML = seconds.toFixed(1);
 }
 
-		/*** Functions ***/
-function findWrongCharIndex(str, word) {
-	for (var i = 0; i < str.length; i++) {
-		if (str.charAt(i) != word.charAt(i)) // return first incorrect index found
-			return i;
-	}
-	return -1;
+function updateElements() {
+	wordElement.innerHTML = wordString;
+	bufferElement.innerHTML = bufferString;
+	scoreElement.innerHTML = score.toFixed(1);;
+	timerElement.innerHTML = seconds.toFixed(1);
 }
 
-function updateBufferString(wrongCharIndex) {
-	correctString = "", wrongString = "";
-
-	// Determine correct & wrong string
-	if (wrongCharIndex == -1) {
-		correctString = bufferString;
-	} else {
-		correctString = bufferString.substr(0, wrongCharIndex);
-		wrongString = bufferString.substr(wrongCharIndex);
-	}
-
-	//Update visual buffer
-	$("#bufferString").empty().html("<span class='correct'>" + correctString + "</span>" +
-		"<span class='wrong'>" + wrongString + "</span>");
-}
-
-function spawnWord(word) {
-	getWord(0).html(word).css({left: 100});
-	wordPos = 100;
-}
-
-// TODO: Finish game loop
+// Main Game loop
 function loop() {
-	console.log("looping...");
-	getWord(0).css({left: wordPos++});
+	checkCorrect();
+	seconds = seconds - 0.1;
+	if (seconds <= 0) {
+		seconds = 0;
+		gameOver();
+	}
+	updateElements();
+}
 
-	if (wordPos > 500 ) {
-		spawnWord("Yes");
+// Loop before and after main game
+function idle() {
+	updateElements();
+	if (bufferString.toLowerCase() == "start") {
+		init();
+		clearInterval(timer);
+		timer = setInterval(loop, 100);
 	}
 }
 
-//Jquery
-function getWord(index) {
-	return  $("#screen > .wordRow:eq(" + index + ") > .word");
+function checkCorrect() {
+	if (bufferString == wordString) {
+		score += seconds;
+		bufferString = "";
+		wordString = getRandomWord(source);
+		seconds = 10;
+	}
 }
+
+function gameOver() {
+	clearInterval(timer);
+	timer = setInterval(idle, 100);
+	wordString = "GAME OVER, type 'start' to play again";
+
+}
+
+function getRandomWord(source) {
+	var word = "";
+
+	if (source == "local") { // use local words
+		//rnd num from (0 to wordsize), avoiding repeats
+		var ind;
+		do {
+			ind = Math.floor(Math.random() * words.length);
+		} while (ind == lastWordInd);
+		word = words[ind];
+		lastWordInd = ind;
+	} else { //get words from text file (or api????)
+
+	}
+
+	return word;
+}
+
+// Handle Inputkkkk
+document.addEventListener("keydown", function(key) {
+
+	//Handle Backspace
+	if (key.keyCode == 8) {
+		//console.log("Backspace!!!");
+		bufferString = bufferString.substring(0, bufferString.length-1);
+	};
+
+	//Handle letter input
+	if (key.keyCode >= 65 && key.keyCode <= 90) {
+		//console.log("Valid Key : " + key.key);
+		bufferString += key.key;
+	}
+	//Update Buffer
+	bufferElement.innerHTML = bufferString;
+});
+
+
+
+
+/*
+setInterval(yes, 500);
+
+function yes() {
+	if (wordElement.innerHTML == "yeet") {
+		wordElement.innerHTML = "yes";
+	} else {
+		wordElement.innerHTML = "yeet";
+	}
+}
+*/

@@ -1,60 +1,81 @@
 /* Disable scroll */
-html, body {
-        overflow: hidden
+
+body {
+	background-color: #252525;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
 }
 
-.wrong {
-        color: #FF0000;
+.container {
+	width: 100%;
+	padding: 0;
+	margin: 0;
 }
 
-.correct {
-        color: #00FF00;
+.music {
+	padding: 0;
+	margin: 0;
+	float:left;
+	width: 25%;
+	height: 100%;
 }
 
-#gameContainer {
-        width: 100vw;
-        border-style: solid;
-        border-width: thick;
-        border-color: #333333;
+#music {
+	height: 15vh;
+
 }
 
-#screen {
-        background-color: #AA88BB;
-        height: 88vh;
+#info {
+	padding-top: 6vh;
+	height: 10vh;
 }
 
-.wordRow {
-        height: 10%;
-        line-height: 500%;
+#timer {
+	padding-left: 10vw;
+	float:left;
 }
 
-.word {
-        position: absolute;
-	left: 100px;
+#timer > * {
+	font-weight: bold;
+	font-family: sans-serif;
+	font-size: 3vw;
+	color: #FFFFFF;
+}
+
+#score {
+	padding-right: 10vw;
+	float:right;
+}
+
+#score > * {
+	font-weight: bold;
+	font-family: sans-serif;
+	font-size: 3vw;
+	color: #FFFFFF;
+}
+
+#word {
+	background-color: #333333;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 6vw;
+	height: 15vh;
+	padding-top: 20vh;
+
 }
 
 #buffer {
-        background-color: #333333;
-        height: 7vh
-}
-
-#bufferString {
-	color: #FFFFFF;A
-        line-height: 200%;
-        font-size: 3vh;
-        text-align: center;
-        height: 100%;
-}
-
-#options {
-        background-color: #333333;
-        height: 5vh
-}
-
-#options>p {
-        color: #FFFFFF;
-	line-height: 200%;
-	font-size: 3vh;
-	text-align: center;
-	height: 100%;
+	border-color: #333333;
+	border-style: solid;
+	border-width: 20px;
+	background-color: #444444;
+	font-size: 4vw;;
+	color: #FFFFFF;
+	height: 5vw;
+	padding-left: 20px;
+	padding-right: 20px;
+	overflow: hidden;
 }
