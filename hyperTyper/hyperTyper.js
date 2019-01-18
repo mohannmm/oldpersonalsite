@@ -8,19 +8,20 @@ const GREETING = "Type start to begin";
 //
 
 var words = ["Apple", "Bob", "cat", "dog", "lactate", "incel", "super", "intermediate", "keyboard", "animalistic"];
+var currentWords = ["", "", "", "",GREETING, "", "" , "", ""];
 
 var lastWordInd = 0;
 //source txt file of words. Defualt words above will be used if file not found
 var source = "wordsList.txt";
 
-var wordString = GREETING;
+//var wordString = GREETING;
 var bufferString = "";
 var score = 0.0;
 var seconds = 10.0;
 
 
 // DOM elements
-var wordElement = document.getElementById("word");
+var wordElement = getWordElement(4); //initially middle
 var bufferElement = document.getElementById("buffer");
 var timerElement = document.getElementById("timerCount");
 var scoreElement = document.getElementById("scoreCount");
@@ -30,23 +31,22 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phon
 	alert("Sorry, Mobile is unsupported :( ");
 }
 var timer = setInterval(idle, 100);
+var difficultyTimer; // initially 1 second
 /************************************************************************/
 
 function init() {
 	loadDoc(source);
 	bufferString = "";
-	wordString = getRandomWord();
+	currentWords[4] = getRandomWord();
 	score = 0.0;
 	seconds = 10.0;
-
-	wordElement.innerHTML = wordString;
-	bufferElement.innerHTML = bufferString;
-	scoreElement.innerHTML = score.toFixed(1);;
-	timerElement.innerHTML = seconds.toFixed(1);
+	updateElements();
 }
 
 function updateElements() {
-	wordElement.innerHTML = wordString;
+	for (var i = 0; i < currentWords.length; i++) {
+		getWordElement(i).innerHTML = currentWords[i];
+	}
 	bufferElement.innerHTML = bufferString;
 	scoreElement.innerHTML = score.toFixed(1);;
 	timerElement.innerHTML = seconds.toFixed(1);
@@ -63,6 +63,11 @@ function loop() {
 	updateElements();
 }
 
+// this loop gets faster as the score increases
+function difficultyLoop() {
+	populateRandomWordElement();
+}
+
 // Loop before and after main game
 function idle() {
 	updateElements();
@@ -70,22 +75,37 @@ function idle() {
 		init();
 		clearInterval(timer);
 		timer = setInterval(loop, 100);
+		difficultyTimer = setInterval(difficultyLoop, 1000);
 	}
 }
 
 function checkCorrect() {
-	if (bufferString == wordString) {
-		score += seconds;
-		bufferString = "";
-		wordString = getRandomWord(source);
-		seconds = 10;
+	for (i = 0; i < currentWords.length; i++) {
+		if (bufferString != "" && bufferString == currentWords[i]) {
+			score += seconds;
+			bufferString = "";
+			//currentWords[i] = getRandomWord();
+			currentWords[i] = "";
+			populateRandomWordElement();
+			seconds = 10;
+		}
 	}
 }
 
 function gameOver() {
 	clearInterval(timer);
+	clearInterval(difficultyTimer);
 	timer = setInterval(idle, 100);
-	wordString = "GAME OVER, " + GREETING;
+	currentWords = ["", "", "", "","... GAME OVER ...\n" + GREETING, "", "" , "", ""];
+}
+
+function populateRandomWordElement() { //this should have random behavior
+	var ind  = Math.floor(Math.random() * currentWords.length);
+		// DO nothing if the random index is taken
+		if (currentWords[ind] == "") {
+			currentWords[ind] = getRandomWord();
+			getWordElement(ind).innerHTML = currentWords[ind];
+		}
 }
 
 function getRandomWord() {
@@ -98,6 +118,10 @@ function getRandomWord() {
 		word = words[ind];
 		lastWordInd = ind;
 	return word;
+}
+
+function getWordElement(num) {
+	return document.getElementById("word" + num);
 }
 
 // Handle Input

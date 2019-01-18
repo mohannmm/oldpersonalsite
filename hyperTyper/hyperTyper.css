@@ -15,6 +15,19 @@ body {
 	margin: 0;
 }
 
+.box {
+	background-color: #333333;
+	height: 150px;
+	width: 1200px;
+	font-size: 3rem;
+	color: #FFF;
+	text-align: center;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center; /* align horizontal */
+	align-items: center; /* align vertical */
+}
+
 .music {
 	padding: 0;
 	margin: 0;
@@ -57,25 +70,27 @@ body {
 	color: #FFFFFF;
 }
 
+/*
 #word {
-	background-color: #333333;
 	color: #FFFFFF;
 	text-align: center;
-	font-size: 5vw;
+	font-size: 2rem;
 	height: 15vh;
 	padding-top: 20vh;
 
 }
+*/
 
 #buffer {
 	border-color: #333333;
 	border-style: solid;
-	border-width: 20px;
+	border-width: 25px;
 	background-color: #444444;
 	font-size: 4vw;;
 	color: #FFFFFF;
 	height: 5vw;
-	padding-left: 20px;
-	padding-right: 20px;
+	width: 1120px;
+	margin: 0 auto;
+	padding: 0 15px 0 15px;
 	overflow: hidden;
 }
