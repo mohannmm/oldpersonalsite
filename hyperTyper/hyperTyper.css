@@ -17,9 +17,10 @@ body {
 
 .box {
 	background-color: #333333;
-	height: 150px;
+	overflow: visible;
+	height: 200px;
 	width: 1200px;
-	font-size: 3rem;
+	font-size: 56px;
 	color: #FFF;
 	text-align: center;
 	margin: 0 auto;
@@ -46,12 +47,12 @@ body {
 	height: 10vh;
 }
 
-#timer {
+#error {
 	padding-left: 10vw;
 	float:left;
 }
 
-#timer > * {
+#error > * {
 	font-weight: bold;
 	font-family: sans-serif;
 	font-size: 3vw;

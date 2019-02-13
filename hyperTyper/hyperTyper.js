@@ -9,7 +9,7 @@ const GREETING = "Type start to begin";
 
 var words = ["Apple", "Bob", "cat", "dog", "lactate", "incel", "super", "intermediate", "keyboard", "animalistic"];
 var currentWords = ["", "", "", "",GREETING, "", "" , "", ""];
-
+var wordsPercentArray = [0, 0, 0, 0, 100, 0, 0, 0, 0];
 var lastWordInd = 0;
 //source txt file of words. Defualt words above will be used if file not found
 var source = "wordsList.txt";
@@ -17,13 +17,13 @@ var source = "wordsList.txt";
 //var wordString = GREETING;
 var bufferString = "";
 var score = 0.0;
-var seconds = 10.0;
+var errors = 0;
 
 
 // DOM elements
 var wordElement = getWordElement(4); //initially middle
 var bufferElement = document.getElementById("buffer");
-var timerElement = document.getElementById("timerCount");
+var errorElement = document.getElementById("errorCount");
 var scoreElement = document.getElementById("scoreCount");
 
 
@@ -39,25 +39,45 @@ function init() {
 	bufferString = "";
 	currentWords[4] = getRandomWord();
 	score = 0.0;
-	seconds = 10.0;
+	errors = 0;
 	updateElements();
 }
 
 function updateElements() {
 	for (var i = 0; i < currentWords.length; i++) {
 		getWordElement(i).innerHTML = currentWords[i];
+		getWordElement(i).style.fontSize = "" + wordsPercentArray[i] + "%";
 	}
 	bufferElement.innerHTML = bufferString;
-	scoreElement.innerHTML = score.toFixed(1);;
-	timerElement.innerHTML = seconds.toFixed(1);
+	scoreElement.innerHTML = score.toFixed(1);
+	errorElement.innerHTML = errors;
+
+	var color = "white";
+	if (errors > 2)
+		color = "yellow";
+	if (errors > 5)
+		color = "orange";
+	if (errors > 7)
+		color = "red";
+	errorElement.style.color = color;
 }
 
 // Main Game loop
 function loop() {
+	// percent-=0.5;
+	// getWordElement(4).style.fontSize = ""+ (percent) + "%";
 	checkCorrect();
-	seconds = seconds - 0.1;
-	if (seconds <= 0) {
-		seconds = 0;
+	for (var i = 0; i < currentWords.length; i++) {
+		if (currentWords[i] != "") {
+			wordsPercentArray[i]--;
+			if (wordsPercentArray[i] <= 0) {
+				errors++;
+				currentWords[i] = ""
+				wordsPercentArray[i] = 100;
+			}
+		}
+	}
+	if (errors >= 10) {
 		gameOver();
 	}
 	updateElements();
@@ -82,10 +102,11 @@ function idle() {
 function checkCorrect() {
 	for (i = 0; i < currentWords.length; i++) {
 		if (bufferString != "" && bufferString == currentWords[i]) {
-			score += seconds;
+			score += 1;
 			bufferString = "";
 			//currentWords[i] = getRandomWord();
 			currentWords[i] = "";
+			wordsPercentArray[i] = 0;
 			populateRandomWordElement();
 			seconds = 10;
 		}
@@ -96,7 +117,8 @@ function gameOver() {
 	clearInterval(timer);
 	clearInterval(difficultyTimer);
 	timer = setInterval(idle, 100);
-	currentWords = ["", "", "", "","... GAME OVER ...\n" + GREETING, "", "" , "", ""];
+	currentWords = ["", "", "", "","GAME OVER " + GREETING, "", "" , "", ""];
+	wordsPercentArray = [0, 0, 0, 0, 100, 0, 0, 0, 0];
 }
 
 function populateRandomWordElement() { //this should have random behavior
@@ -105,6 +127,7 @@ function populateRandomWordElement() { //this should have random behavior
 		if (currentWords[ind] == "") {
 			currentWords[ind] = getRandomWord();
 			getWordElement(ind).innerHTML = currentWords[ind];
+			wordsPercentArray[ind] = 100;
 		}
 }
 
