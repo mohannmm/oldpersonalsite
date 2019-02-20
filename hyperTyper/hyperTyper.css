@@ -1,74 +1,75 @@
 /* Disable scroll */
-
 body {
-	background-color: #252525;
-	overflow: hidden;
-	margin: 0;
-	padding: 0;
-	width: 100vw;
-	height: 100vh;
+        background-color: #252525;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        width: 95vw;
+        height: 95vh;
 }
 
 .container {
-	width: 100%;
-	padding: 0;
-	margin: 0;
+        width: 1200px;
+        height: 90%;
+        padding: 0;
+        margin: auto;
 }
 
 .box {
-	background-color: #333333;
-	overflow: visible;
-	height: 200px;
-	width: 1200px;
-	font-size: 56px;
-	color: #FFF;
-	text-align: center;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center; /* align horizontal */
-	align-items: center; /* align vertical */
+        background-color: #333333;
+        overflow: visible;
+        height: 190px;
+        width: 1200px;
+        font-size: 56px;
+        color: #FFF;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        /* align horizontal */
+        align-items: center;
+        /* align vertical */
 }
 
 .music {
-	padding: 0;
-	margin: 0;
-	float:left;
-	width: 100%;
-	height: 100%;
+        padding: 0;
+        margin: 0;
+        float: left;
+        width: 100%;
+        height: 60%;
 }
 
 #music {
-	height: 15vh;
-
+        height: 10vh;
 }
 
 #info {
-	padding-top: 6vh;
-	height: 10vh;
+        padding-top: 6vh;
+        height: 10vh;
 }
 
 #error {
-	padding-left: 10vw;
-	float:left;
+        padding-left: 10vw;
+        float: left;
 }
 
-#error > * {
-	font-weight: bold;
-	font-family: sans-serif;
-	font-size: 3vw;
-	color: #FFFFFF;
+#error>* {
+        font-weight: bold;
+        font-family: sans-serif;
+        font-size: 4vh;
+        color: #FFFFFF;
 }
 
 #score {
-	padding-right: 10vw;
-	float:right;
+        padding-right: 10vw;
+        float: right;
 }
 
-#score > * {
-	font-weight: bold;
-	font-family: sans-serif;
-	font-size: 3vw;
-	color: #FFFFFF;
+#score>* {
+        font-weight: bold;
+        font-family: sans-serif;
+        font-size: 4vh;
+        color: #FFFFFF;
 }
 
 /*
@@ -81,17 +82,16 @@ body {
 
 }
 */
-
 #buffer {
-	border-color: #333333;
-	border-style: solid;
-	border-width: 25px;
-	background-color: #444444;
-	font-size: 4vw;;
-	color: #FFFFFF;
-	height: 5vw;
-	width: 1120px;
-	margin: 0 auto;
-	padding: 0 15px 0 15px;
-	overflow: hidden;
+        border-color: #333333;
+        border-style: solid;
+        border-width: 25px;
+        background-color: #444444;
+        font-size: 6vh;
+        color: #FFFFFF;
+        height: 70px;
+        width: 1120px;
+        margin: 0 auto;
+        padding: 0 15px 0 15px;
+        overflow: hidden;
 }
