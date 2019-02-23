@@ -18,7 +18,23 @@ var source = "wordsList.txt";
 var bufferString = "";
 var score = 0.0;
 var errors = 0;
+var diff = 0.5
 
+var idleMusic = new Howl({
+	src:['./music/retroLoop1.wav', './music/Yeet.wav'],
+	loop: true,
+	autoplay: true,
+	rate: 0.9,
+	volume: 0.85
+});
+
+var mainMusic = new Howl({
+	src:['./music/Yeet.wav'],
+	loop: true,
+	autoplay: false,
+	rate: 1,
+	volume: 0.8
+});
 
 // DOM elements
 var wordElement = getWordElement(4); //initially middle
@@ -27,14 +43,19 @@ var errorElement = document.getElementById("errorCount");
 var scoreElement = document.getElementById("scoreCount");
 
 
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera 	Mini|Mobile/i.test(navigator.userAgent)) {
-	alert("Sorry, Mobile is unsupported :( ");
-}
+// if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera 	Mini|Mobile/i.test(navigator.userAgent)) {
+// 	alert("Sorry, Mobile is unsupported :( ");
+// }
+
 var timer = setInterval(idle, 100);
-var difficultyTimer; // initially 1 second
+var difficultyTimer;
 /************************************************************************/
 
 function init() {
+	idleMusic.stop();
+	mainMusic.rate(1);
+	mainMusic.play();
+
 	loadDoc(source);
 	bufferString = "";
 	currentWords[4] = getRandomWord();
@@ -53,12 +74,18 @@ function updateElements() {
 	errorElement.innerHTML = errors;
 
 	var color = "white";
-	if (errors > 2)
+	if (errors > 2) {
 		color = "yellow";
-	if (errors > 5)
+		mainMusic.rate(1.2);
+	}
+	if (errors > 5) {
 		color = "orange";
-	if (errors > 7)
+		mainMusic.rate(1.5);
+	}
+	if (errors > 7) {
 		color = "red";
+		mainMusic.rate(2);
+	}
 	errorElement.style.color = color;
 }
 
@@ -69,18 +96,20 @@ function loop() {
 	checkCorrect();
 	for (var i = 0; i < currentWords.length; i++) {
 		if (currentWords[i] != "") {
-			wordsPercentArray[i]--;
-			if (wordsPercentArray[i] <= 0) {
+			wordsPercentArray[i]-= diff;
+			if (wordsPercentArray[i] <= 15) {
 				errors++;
 				currentWords[i] = ""
 				wordsPercentArray[i] = 100;
 			}
 		}
+		updateElements();
 	}
 	if (errors >= 10) {
 		gameOver();
 	}
 	updateElements();
+	diff = 0.5 + (score / 100)
 }
 
 // this loop gets faster as the score increases
@@ -92,6 +121,7 @@ function difficultyLoop() {
 function idle() {
 	updateElements();
 	if (bufferString.toLowerCase() == "start") {
+		//audio();
 		init();
 		clearInterval(timer);
 		timer = setInterval(loop, 100);
@@ -102,7 +132,7 @@ function idle() {
 function checkCorrect() {
 	for (i = 0; i < currentWords.length; i++) {
 		if (bufferString != "" && bufferString == currentWords[i]) {
-			score += 1;
+			score += 1 + (score / 10.0 * diff);
 			bufferString = "";
 			//currentWords[i] = getRandomWord();
 			currentWords[i] = "";
@@ -114,6 +144,8 @@ function checkCorrect() {
 }
 
 function gameOver() {
+	mainMusic.stop()
+	idleMusic.play();
 	clearInterval(timer);
 	clearInterval(difficultyTimer);
 	timer = setInterval(idle, 100);
@@ -165,6 +197,7 @@ document.addEventListener("keydown", function(key) {
 	bufferElement.innerHTML = bufferString;
 });
 
+//Allows us to load txt file in to read words
 function loadDoc(source) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {

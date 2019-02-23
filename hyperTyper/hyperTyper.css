@@ -20,7 +20,8 @@ body {
         overflow: visible;
         height: 190px;
         width: 1200px;
-        font-size: 56px;
+        font-size: 42px;
+        font-family: '8BITWONDERNominal';
         color: #FFF;
         text-align: center;
         margin: 0 auto;
@@ -55,7 +56,7 @@ body {
 
 #error>* {
         font-weight: bold;
-        font-family: sans-serif;
+        font-family: '8BITWONDERNominal';
         font-size: 4vh;
         color: #FFFFFF;
 }
@@ -67,7 +68,7 @@ body {
 
 #score>* {
         font-weight: bold;
-        font-family: sans-serif;
+        font-family: '8BITWONDERNominal';
         font-size: 4vh;
         color: #FFFFFF;
 }
@@ -88,6 +89,7 @@ body {
         border-width: 25px;
         background-color: #444444;
         font-size: 6vh;
+        font-family: '8BITWONDERNominal';
         color: #FFFFFF;
         height: 70px;
         width: 1120px;
