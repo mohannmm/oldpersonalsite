@@ -10,7 +10,7 @@ body {
 
 .container {
         width: 1200px;
-        height: 90%;
+        height: 30%;
         padding: 0;
         margin: auto;
 }
@@ -18,7 +18,7 @@ body {
 .box {
         background-color: #333333;
         overflow: visible;
-        height: 190px;
+        height: 22%;
         width: 1200px;
         font-size: 42px;
         font-family: '8BITWONDERNominal';
@@ -27,6 +27,7 @@ body {
         margin: 0 auto;
         display: flex;
         justify-content: center;
+        overflow: visible;
         /* align horizontal */
         align-items: center;
         /* align vertical */
