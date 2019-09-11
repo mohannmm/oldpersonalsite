@@ -1,0 +1,20 @@
+h1 {
+        text-align: center;
+}
+
+.container {
+        padding: 5%;
+}
+
+.postlogin {
+        visibility: hidden;
+}
+
+.prelogin {
+        visibility: visible;
+}
+
+#buttonGroup {
+        background-color: #EEEEEE;
+        border-radius: 30px;
+}
